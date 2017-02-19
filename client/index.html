@@ -10,18 +10,18 @@
   <body>
     <nav class="navbar">
       <div class="nav-wrapper">
-        <a href="/index.html" class="brand-logo">Web Api Client Server Scoping</a>
+        <a href="/index.html?data=123456789" class="brand-logo">Web Api Client Server Scoping</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><button id="button-1" style="margin-right:15px;" type="button" class="btn purple darken-4" data-heading="Lorem Ipsum">Data-Heading</button></li>
-          <li><button id="button-2" style="margin-right:15px;" type="button" class="btn indigo darken-4">Lorem Ipsum</button></li>
-          <li><button id="button-3" style="margin-right:15px;" type="button" class="btn lime darken-4">Lorem Ipsum</button></li>
+          <li><button id="button-1" style="margin-right:15px;" type="button" class="btn purple darken-4" data-heading="Pikachu, pikapi..">Index</button></li>
+          <li><button id="button-2" style="margin-right:15px;" type="button" class="btn indigo darken-4">Skills</button></li>
+          <li><button id="button-3" style="margin-right:15px;" type="button" class="btn lime darken-4">Heroes</button></li>
         </ul>
       </div>
     </nav>
 
     <div class="container">
       <div class="row" style="margin-bottom: 10px;">
-        <h3 id="show" style="color: #006666; text-align:center;">Welcome aboard!</h3>
+        <h3 id="show" style="color: #006666; text-align:center;">Welcome onboard!</h3>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -37,9 +37,52 @@
 
       $('#button-1').click(function () {
         let attrVal = $('#button-1').attr('data-heading')
-        $('#show').text(attrVal)
-        console.log(document.URL);
+        if($('#show').text() == 'Welcome onboard!') {
+          $('#show').text(attrVal)
+        }
+        else{
+          $('#show').text('Welcome onboard!')
+        }
       })
+
+      $('#button-2').click(function (e) {
+        e.preventDefault()
+        $.ajax({
+          type: 'GET',
+          url: 'http://localhost:3000/skills/',
+          success: function(data) {
+            if($('#show').text() == 'Welcome onboard!') {
+              if(document.URL === 'http://127.0.0.1:8080/') {
+                $('#show').text(document.URL)
+              } else {
+                $('#show').text(getUrlParameter('id'), getUrlParameter('token'))
+              }
+            }
+            else{
+              $('#show').text('Welcome onboard!')
+            }
+          },
+          error: function(error) {
+            console.log(error);
+            console.log('GET Response Error');
+          }
+        })
+      })
+
+      $('#button-3').click(function () {
+        let attrVal = $('#button-1').attr('data-heading')
+        if($('#show').text() == 'Welcome onboard!') {
+          if(document.URL === 'http://127.0.0.1:8080/') {
+            $('#show').text(document.URL)
+          } else {
+            $('#show').text(getUrlParameter('data'))
+          }
+        }
+        else{
+          $('#show').text('Welcome onboard!')
+        }
+      })
+
     </script>
   </body>
 </html>
