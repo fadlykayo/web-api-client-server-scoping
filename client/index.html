@@ -15,6 +15,7 @@
           <li><button id="button-1" style="margin-right:15px;" type="button" class="btn purple darken-4" data-heading="Pikachu, pikapi..">Index</button></li>
           <li><button id="button-2" style="margin-right:15px;" type="button" class="btn indigo darken-4">Skills</button></li>
           <li><button id="button-3" style="margin-right:15px;" type="button" class="btn lime darken-4">Heroes</button></li>
+          <li><button id="button-4" style="margin-right:15px;" type="button" class="btn blue darken-4">Show Heroes</button></li>
         </ul>
       </div>
     </nav>
@@ -58,11 +59,26 @@
         }
       })
 
-      window.globalArr = ['Hulk', 'Spider-Man', 'Iron Man', 'Doctor Strange', 'Captain America', 'Deadpool', 'Thor', 'Ant-Man', 'Black Widow']
-
       $('#button-3').click(function () {
+        $.ajax({
+          type: 'GET',
+          url: 'http://localhost:3000/heroes',
+          success: function(resp) {
+            sessionStorage.setItem('heroes', resp)
+          },
+          error: function(err) {
+            console.log(err);
+          }
+        });
+      })
+
+      window.heroes = sessionStorage.getItem('heroes')
+      let that = this
+
+      $('#button-4').click(function () {
         let random = Math.floor(Math.random() * 9)
-        $('#show').text(globalArr[random])
+        let arr = $(that).attr('heroes').split(',')  
+        $('#show').text(arr[random])
       })
 
     </script>
