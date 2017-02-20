@@ -50,7 +50,7 @@
           if(document.URL === 'http://127.0.0.1:8080/') {
             $('#show').text(document.URL)
           } else {
-            $('#show').text(getUrlParameter('id'), getUrlParameter('token'))
+            $('#show').text(getUrlParameter('data'))
           }
         }
         else{
@@ -58,18 +58,11 @@
         }
       })
 
+      window.globalArr = ['Hulk', 'Spider-Man', 'Iron Man', 'Doctor Strange', 'Captain America', 'Deadpool', 'Thor', 'Ant-Man', 'Black Widow']
+
       $('#button-3').click(function () {
-        let attrVal = $('#button-1').attr('data-heading')
-        if($('#show').text() == 'Welcome onboard!') {
-          if(document.URL === 'http://127.0.0.1:8080/') {
-            $('#show').text(document.URL)
-          } else {
-            $('#show').text(getUrlParameter('data'))
-          }
-        }
-        else{
-          $('#show').text('Welcome onboard!')
-        }
+        let random = Math.floor(Math.random() * 9)
+        $('#show').text(globalArr[random])
       })
 
     </script>
