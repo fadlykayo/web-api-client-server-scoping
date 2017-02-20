@@ -65,6 +65,7 @@
           url: 'http://localhost:3000/heroes',
           success: function(resp) {
             sessionStorage.setItem('heroes', resp)
+            window.heroes = sessionStorage.getItem('heroes')
           },
           error: function(err) {
             console.log(err);
@@ -72,12 +73,11 @@
         });
       })
 
-      window.heroes = sessionStorage.getItem('heroes')
       let that = this
 
       $('#button-4').click(function () {
         let random = Math.floor(Math.random() * 9)
-        let arr = $(that).attr('heroes').split(',')  
+        let arr = $(that).attr('heroes').split(',')
         $('#show').text(arr[random])
       })
 
