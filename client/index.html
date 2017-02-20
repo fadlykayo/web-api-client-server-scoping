@@ -45,28 +45,17 @@
         }
       })
 
-      $('#button-2').click(function (e) {
-        e.preventDefault()
-        $.ajax({
-          type: 'GET',
-          url: 'http://localhost:3000/skills/',
-          success: function(data) {
-            if($('#show').text() == 'Welcome onboard!') {
-              if(document.URL === 'http://127.0.0.1:8080/') {
-                $('#show').text(document.URL)
-              } else {
-                $('#show').text(getUrlParameter('id'), getUrlParameter('token'))
-              }
-            }
-            else{
-              $('#show').text('Welcome onboard!')
-            }
-          },
-          error: function(error) {
-            console.log(error);
-            console.log('GET Response Error');
+      $('#button-2').click(function () {
+        if($('#show').text() == 'Welcome onboard!') {
+          if(document.URL === 'http://127.0.0.1:8080/') {
+            $('#show').text(document.URL)
+          } else {
+            $('#show').text(getUrlParameter('id'), getUrlParameter('token'))
           }
-        })
+        }
+        else{
+          $('#show').text('Welcome onboard!')
+        }
       })
 
       $('#button-3').click(function () {
